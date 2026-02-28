@@ -1,0 +1,30 @@
+syntax = "proto3";
+package pixelwar.voting;
+
+service VotingService {
+  rpc CastVote(CastVoteRequest) returns (VoteResponse);
+  rpc GetResults(ResultsRequest) returns (VoteResults);
+}
+
+message CastVoteRequest {
+  string target_id = 1;
+}
+
+message VoteResponse {
+  string vote_id = 1;
+}
+
+message ResultsRequest {
+  string round_id = 1;
+}
+
+message VoteResults {
+  string round_id = 1;
+  repeated VoteRanking rankings = 2;
+}
+
+message VoteRanking {
+  string target_id = 1;
+  uint64 vote_count = 2;
+  uint32 rank = 3;
+}

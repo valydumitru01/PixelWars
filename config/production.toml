@@ -1,0 +1,16 @@
+[canvas]
+width = 10000
+height = 10000
+parcel_size = 10000
+
+[rounds]
+drawing_duration_days = 30
+activity_deadline_days = 3
+voting_duration_days = 3
+
+[groups]
+max_size = 10
+
+[rate_limiting]
+requests_per_minute = 60
+pixel_updates_per_second = 30

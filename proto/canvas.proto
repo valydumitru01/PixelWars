@@ -1,0 +1,50 @@
+syntax = "proto3";
+package pixelwar.canvas;
+
+service CanvasService {
+  rpc ClaimParcel(ClaimParcelRequest) returns (ParcelResponse);
+  rpc UpdatePixels(BatchPixelUpdate) returns (UpdateResponse);
+  rpc GetSnapshot(SnapshotRequest) returns (SnapshotResponse);
+}
+
+message ClaimParcelRequest {
+  uint32 origin_x = 1;
+  uint32 origin_y = 2;
+  uint32 width = 3;
+  uint32 height = 4;
+  string description = 5;
+}
+
+message ParcelResponse {
+  string parcel_id = 1;
+  string status = 2;
+}
+
+message PixelUpdate {
+  string parcel_id = 1;
+  uint32 local_x = 2;
+  uint32 local_y = 3;
+  uint32 color = 4;
+}
+
+message BatchPixelUpdate {
+  string parcel_id = 1;
+  repeated PixelUpdate pixels = 2;
+}
+
+message UpdateResponse {
+  uint32 pixels_updated = 1;
+}
+
+message SnapshotRequest {
+  uint32 x = 1;
+  uint32 y = 2;
+  uint32 width = 3;
+  uint32 height = 4;
+}
+
+message SnapshotResponse {
+  bytes data = 1;
+  uint32 width = 2;
+  uint32 height = 3;
+}

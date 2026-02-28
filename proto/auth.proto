@@ -1,0 +1,35 @@
+syntax = "proto3";
+package pixelwar.auth;
+
+service AuthService {
+  rpc Register(RegisterRequest) returns (AuthResponse);
+  rpc Login(LoginRequest) returns (AuthResponse);
+  rpc ValidateToken(TokenRequest) returns (UserClaims);
+}
+
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message TokenRequest {
+  string token = 1;
+}
+
+message AuthResponse {
+  string token = 1;
+  string user_id = 2;
+  string username = 3;
+}
+
+message UserClaims {
+  string user_id = 1;
+  string username = 2;
+  int64 exp = 3;
+}

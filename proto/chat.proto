@@ -1,0 +1,36 @@
+syntax = "proto3";
+package pixelwar.chat;
+
+service ChatService {
+  rpc SendMessage(SendMessageRequest) returns (MessageResponse);
+  rpc StreamMessages(StreamRequest) returns (stream ChatMessage);
+}
+
+message SendMessageRequest {
+  ChatChannel channel = 1;
+  string content = 2;
+}
+
+message ChatChannel {
+  oneof channel_type {
+    bool global = 1;
+    string group_id = 2;
+    string whisper_to_user_id = 3;
+  }
+}
+
+message MessageResponse {
+  string message_id = 1;
+}
+
+message StreamRequest {
+  ChatChannel channel = 1;
+}
+
+message ChatMessage {
+  string id = 1;
+  string sender_id = 2;
+  string sender_name = 3;
+  string content = 4;
+  string created_at = 5;
+}

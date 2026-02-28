@@ -1,0 +1,38 @@
+syntax = "proto3";
+package pixelwar.groups;
+
+service GroupService {
+  rpc CreateGroup(CreateGroupRequest) returns (GroupResponse);
+  rpc InviteMember(InviteRequest) returns (InviteResponse);
+  rpc AcceptInvite(AcceptInviteRequest) returns (GroupResponse);
+  rpc GetGroup(GetGroupRequest) returns (GroupResponse);
+}
+
+message CreateGroupRequest {
+  string name = 1;
+}
+
+message InviteRequest {
+  string group_id = 1;
+  string to_user_id = 2;
+}
+
+message AcceptInviteRequest {
+  string invite_id = 1;
+}
+
+message GetGroupRequest {
+  string group_id = 1;
+}
+
+message GroupResponse {
+  string group_id = 1;
+  string name = 2;
+  string creator_id = 3;
+  repeated string member_ids = 4;
+}
+
+message InviteResponse {
+  string invite_id = 1;
+  string status = 2;
+}

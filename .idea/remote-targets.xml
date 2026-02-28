@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="WSL - Ubuntu" type="wsl" uuid="e6862022-e8be-46f2-a59a-69e6065dcb5c">
+        <config>
+          <option name="distributionMsId" value="Ubuntu" />
+          <option name="projectRootOnTarget" value="{exitCode=0, timeout=false, cancelled=false, stdout=/tmp/tmp.buLLsDSqnr&#13;&#10;, stderr=}/PixelWar" />
+        </config>
+        <ContributedStateBase type="RsLanguageRuntime">
+          <config>
+            <option name="cargoPath" value="/snap/bin/cargo" />
+            <option name="cargoVersion" value="[0m[1m[31merror: [0mrustup could not choose a version of cargo to run, because one wasn't specified explicitly, and no default is configured." />
+            <option name="rustcPath" value="/snap/bin/rustc" />
+            <option name="rustcVersion" value="[0m[1m[31merror: [0mrustup could not choose a version of rustc to run, because one wasn't specified explicitly, and no default is configured." />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>

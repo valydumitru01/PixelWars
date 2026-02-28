@@ -1,0 +1,58 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/shared-common",
+    "crates/shared-db",
+    "crates/shared-observability",
+    "crates/shared-messaging",
+    "services/api-gateway",
+    "services/auth-service",
+    "services/canvas-service",
+    "services/chat-service",
+    "services/voting-service",
+    "services/group-service",
+    "services/scheduler-service",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["Valentin <valentindmtr115@gmail.com>"]
+license = "MIT"
+
+[workspace.dependencies]
+tokio = { version = "1", features = ["full"] }
+axum = { version = "0.8", features = ["ws", "macros"] }
+axum-extra = { version = "0.12", features = ["typed-header"] }
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace", "compression-gzip", "request-id"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "1"
+sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "uuid", "chrono", "json"] }
+redis = { version = "1", features = ["tokio-comp", "connection-manager"] }
+async-nats = "0.46"
+jsonwebtoken = "10"
+argon2 = "0.5"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json", "fmt"] }
+tracing-opentelemetry = "0.32"
+opentelemetry = { version = "0.31", features = ["metrics"] }
+opentelemetry_sdk = { version = "0.31", features = ["rt-tokio"] }
+opentelemetry-otlp = { version = "0.31", features = ["tonic", "grpc-tonic"] }
+metrics = "0.24"
+metrics-exporter-prometheus = "0.18"
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+thiserror = "2"
+anyhow = "1"
+dotenvy = "0.15"
+shared-common = { path = "crates/shared-common" }
+shared-db = { path = "crates/shared-db" }
+shared-observability = { path = "crates/shared-observability" }
+shared-messaging = { path = "crates/shared-messaging" }
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
