@@ -3,7 +3,7 @@ use axum::{routing::{get, post}, Router};
 pub fn routes() -> Router<crate::state::AppState> {
     Router::new()
         .route("/parcels", post(claim_parcel))
-        .route("/parcels/:id", get(get_parcel))
+        .route("/parcels/{id}", get(get_parcel))
         .route("/pixels", post(update_pixels))
         .route("/snapshot", get(get_snapshot))
 }

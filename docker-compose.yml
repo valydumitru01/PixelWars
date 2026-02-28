@@ -3,7 +3,7 @@ version: "3.8"
 services:
   # ── Infrastructure ──────────────────────────────────────
   postgres:
-    image: postgres:16-alpine
+    image: public.ecr.aws/docker/library/postgres:16-alpine
     environment:
       POSTGRES_USER: pixelwar
       POSTGRES_PASSWORD: pixelwar
@@ -19,7 +19,7 @@ services:
       retries: 5
 
   redis:
-    image: redis:7-alpine
+    image: public.ecr.aws/docker/library/redis:7-alpine
     ports:
       - "6379:6379"
     command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru
@@ -30,7 +30,7 @@ services:
       retries: 5
 
   nats:
-    image: nats:2-alpine
+    image: public.ecr.aws/docker/library/nats:2-alpine
     ports:
       - "4222:4222"
       - "8222:8222"  # monitoring

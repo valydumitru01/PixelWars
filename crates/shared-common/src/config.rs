@@ -13,23 +13,37 @@ pub struct ServiceConfig {
 }
 
 impl ServiceConfig {
-    /// Load config from environment variables.
     pub fn from_env(service_name: &str) -> Result<Self, anyhow::Error> {
+        // Generate the prefix (e.g., "api-gateway" -> "API_GATEWAY")
+        let env_prefix = service_name.to_uppercase().replace("-", "_");
+
+        // Helper to fetch and provide clear error messages
+        let get_env = |key: &str| {
+            std::env::var(key).map_err(|_| {
+                anyhow::anyhow!("Missing required environment variable: {}", key)
+            })
+        };
+
+        // Construct service-specific keys
+        let port_key = format!("{}_PORT", env_prefix);
+
         Ok(Self {
             service_name: service_name.to_string(),
-            host: std::env::var("HOST").unwrap_or_else(|_| "0.0.0.0".to_string()),
-            port: std::env::var("PORT")
-                .unwrap_or_else(|_| "8080".to_string())
-                .as_str()
-                .parse::<u16>()?,
-            database_url: std::env::var("DATABASE_URL")?,
-            redis_url: std::env::var("REDIS_URL")
-                .unwrap_or_else(|_| "redis://127.0.0.1:6379".to_string()),
-            nats_url: std::env::var("NATS_URL")
-                .unwrap_or_else(|_| "nats://127.0.0.1:4222".to_string()),
-            jwt_secret: std::env::var("JWT_SECRET")?,
-            otel_endpoint: std::env::var("OTEL_ENDPOINT")
-                .unwrap_or_else(|_| "http://localhost:4317".to_string()),
+
+            host: get_env("HOST")?,
+
+            port: get_env(&port_key)?.parse::<u16>()
+                .map_err(|_| anyhow::anyhow!("{} must be a valid number", port_key))?,
+
+            database_url: get_env("DATABASE_URL")?,
+
+            redis_url: get_env("REDIS_URL")?,
+
+            nats_url: get_env("NATS_URL")?,
+
+            jwt_secret: get_env("JWT_SECRET")?,
+
+            otel_endpoint: get_env("OTEL_ENDPOINT")?,
         })
     }
 }

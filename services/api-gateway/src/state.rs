@@ -11,6 +11,7 @@ pub struct AppState {
     pub jwt_secret: String,
 }
 
+
 impl AppState {
     pub fn new(redis: ConnectionManager, nats: NatsClient, jwt_secret: String) -> Self {
         Self { redis, nats, jwt_secret }

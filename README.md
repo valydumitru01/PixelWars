@@ -56,7 +56,7 @@ A distributed pixel art competition platform built with Rust microservices. Insp
 
 ## Tech Stack
 
-- **Language**: Rust 2021 edition
+- **Language**: Rust 2024 edition
 - **Web framework**: Axum 0.7 (async, tower-based)
 - **Database**: PostgreSQL 16 via sqlx
 - **Cache/Canvas store**: Redis 7 (bitmaps for pixel data)
@@ -83,7 +83,7 @@ This starts PostgreSQL, Redis, NATS, Jaeger, Prometheus, and Grafana.
 ### 2. Set up environment
 
 ```bash
-cp .env.example .env
+cp .env .env
 # Edit .env with your settings
 ```
 

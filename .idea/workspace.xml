@@ -41,7 +41,24 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fba6ddd5-8e55-46f3-9c46-f52c76cbbcd4" name="Changes" comment="" />
+    <list default="true" id="fba6ddd5-8e55-46f3-9c46-f52c76cbbcd4" name="Changes" comment="Initial commit">
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-common/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-common/src/config.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/src/config.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-common/src/errors.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/src/errors.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-observability/src/tracing.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-observability/src/tracing.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/middleware/rate_limit.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/middleware/rate_limit.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/canvas.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/canvas.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/chat.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/chat.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/groups.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/groups.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/state.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/state.rs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,6 +75,21 @@
     </selectedModels>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="RsBuildProfile:dev" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;valydumitru01&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/valydumitru01/PixelWars.git&quot;,
+    &quot;accountId&quot;: &quot;68f1164a-50f6-44bd-a36d-e713c52a132b&quot;
+  }
+}</component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="c8hztSNb" />
   </component>
@@ -73,22 +105,26 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Cargo.Api-Gateway.executor": "Run",
     "Cargo.Run.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/Lenovo/Desktop/Github_repos/PixelWar",
     "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
     "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
     "org.rust.first.attach.projects": "true",
-    "settings.editor.selected.configurable": "advanced.settings"
+    "settings.editor.selected.configurable": "terminal"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="Run" type="CargoCommandRunConfiguration" factoryName="Cargo Command" nameIsGenerated="true">
+  <component name="RunManager" selected="Cargo.Api-Gateway">
+    <configuration name="Api-Gateway" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="buildProfileId" value="dev" />
-      <option name="command" value="run" />
+      <option name="command" value="run --bin api-gateway" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$" />
       <envs />
       <option name="emulateTerminal" value="true" />
@@ -104,6 +140,18 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Compose" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Cargo.Api-Gateway" />
+      <item itemvalue="Docker.Compose" />
+    </list>
   </component>
   <component name="RustProjectSettings">
     <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
@@ -115,9 +163,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1772284142270</updated>
-      <workItem from="1772284143465" duration="9000000" />
+      <workItem from="1772284143465" duration="9375000" />
+      <workItem from="1772296534934" duration="533000" />
+      <workItem from="1772297107149" duration="370000" />
+      <workItem from="1772298067660" duration="14078000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1772296424904</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1772296424904</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
