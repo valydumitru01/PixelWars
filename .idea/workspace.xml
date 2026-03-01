@@ -41,23 +41,14 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fba6ddd5-8e55-46f3-9c46-f52c76cbbcd4" name="Changes" comment="Initial commit">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
+    <list default="true" id="fba6ddd5-8e55-46f3-9c46-f52c76cbbcd4" name="Changes" comment="Some doings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crates/shared-common/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crates/shared-common/src/config.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/src/config.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crates/shared-common/src/errors.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/src/errors.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crates/shared-observability/src/tracing.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-observability/src/tracing.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/auth.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/auth.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/Cargo.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/api-gateway/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/middleware/rate_limit.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/middleware/rate_limit.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/canvas.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/canvas.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/chat.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/chat.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/groups.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/groups.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/state.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/state.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/mod.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,9 +109,12 @@
     "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
     "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
     "org.rust.first.attach.projects": "true",
-    "settings.editor.selected.configurable": "terminal"
+    "settings.editor.selected.configurable": "language.rust.cargo.check"
   }
 }]]></component>
+  <component name="RsExternalLinterProjectSettings">
+    <option name="runOnTheFly" value="false" />
+  </component>
   <component name="RunManager" selected="Cargo.Api-Gateway">
     <configuration name="Api-Gateway" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="buildProfileId" value="dev" />
@@ -166,7 +160,7 @@
       <workItem from="1772284143465" duration="9375000" />
       <workItem from="1772296534934" duration="533000" />
       <workItem from="1772297107149" duration="370000" />
-      <workItem from="1772298067660" duration="14078000" />
+      <workItem from="1772298067660" duration="23414000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -176,12 +170,21 @@
       <option name="project" value="LOCAL" />
       <updated>1772296424904</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Some doings">
+      <option name="closed" value="true" />
+      <created>1772316357227</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1772316357227</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Some doings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some doings" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

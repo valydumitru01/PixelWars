@@ -25,7 +25,7 @@ tokio = { version = "1", features = ["full"] }
 axum = { version = "0.8", features = ["ws", "macros"] }
 axum-extra = { version = "0.12", features = ["typed-header"] }
 tower = "0.5"
-tower-http = { version = "0.6", features = ["cors", "trace", "compression-gzip", "request-id"] }
+tower-http = { version = "0.6", features = ["cors", "trace", "request-id", "limit", "propagate-header"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 toml = "1"

@@ -20,7 +20,7 @@ message LoginRequest {
 
 message TokenRequest {
   string token = 1;
-}
+}s
 
 message AuthResponse {
   string token = 1;
