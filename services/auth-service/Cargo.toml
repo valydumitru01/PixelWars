@@ -21,3 +21,8 @@ dotenvy = { workspace = true }
 jsonwebtoken = { workspace = true }
 argon2 = { workspace = true }
 sqlx = { workspace = true }
+tonic = { workspace = true }
+prost = { workspace = true }
+
+[build-dependencies]
+tonic-build = "0.12"

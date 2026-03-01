@@ -15,7 +15,7 @@ pub struct User {
     pub last_draw_at: Option<DateTime<Utc>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct UserClaims {
     pub sub: Uuid,
     pub username: String,

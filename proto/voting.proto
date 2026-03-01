@@ -2,29 +2,40 @@ syntax = "proto3";
 package pixelwar.voting;
 
 service VotingService {
-  rpc CastVote(CastVoteRequest) returns (VoteResponse);
-  rpc GetResults(ResultsRequest) returns (VoteResults);
+  rpc CastVote(CastVoteRequest) returns (CastVoteReply);
+  rpc GetResults(GetResultsRequest) returns (GetResultsReply);
+  rpc IsVotingOpen(IsVotingOpenRequest) returns (IsVotingOpenReply);
 }
 
 message CastVoteRequest {
-  string target_id = 1;
+  string round_id  = 1;
+  string voter_id  = 2;
+  string target_id = 3;
 }
 
-message VoteResponse {
+message CastVoteReply {
   string vote_id = 1;
 }
 
-message ResultsRequest {
+message GetResultsRequest {
   string round_id = 1;
 }
 
-message VoteResults {
-  string round_id = 1;
-  repeated VoteRanking rankings = 2;
+message VoteRankingProto {
+  string target_id   = 1;
+  uint64 vote_count  = 2;
+  uint32 rank        = 3;
 }
 
-message VoteRanking {
-  string target_id = 1;
-  uint64 vote_count = 2;
-  uint32 rank = 3;
+message GetResultsReply {
+  string round_id                   = 1;
+  repeated VoteRankingProto rankings = 2;
+}
+
+message IsVotingOpenRequest {
+  string round_id = 1;
+}
+
+message IsVotingOpenReply {
+  bool is_open = 1;
 }

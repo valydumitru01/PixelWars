@@ -19,3 +19,8 @@ tracing = { workspace = true }
 anyhow = { workspace = true }
 dotenvy = { workspace = true }
 sqlx = { workspace = true }
+tonic = { workspace = true }
+prost = { workspace = true }
+
+[build-dependencies]
+tonic-build = "0.12"

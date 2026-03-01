@@ -9,7 +9,10 @@ struct HealthResponse {
 }
 
 /// Create health-check routes: GET /health and GET /ready.
-pub fn health_routes(service_name: &str) -> Router {
+pub fn health_routes<S>(service_name: &str) -> Router<S>
+where
+    S: Clone + Send + Sync + 'static
+{
     let name = service_name.to_string();
     Router::new()
         .route("/health", get({

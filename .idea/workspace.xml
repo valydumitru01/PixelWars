@@ -42,13 +42,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fba6ddd5-8e55-46f3-9c46-f52c76cbbcd4" name="Changes" comment="Some doings">
+      <change beforePath="$PROJECT_DIR$/.idea/PixelWar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PixelWar.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-common/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-common/src/config.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/src/config.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-common/src/errors.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/src/errors.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-common/src/models/parcel.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/src/models/parcel.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-common/src/models/user.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/src/models/user.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-db/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-db/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/shared-observability/src/health.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-observability/src/health.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/001_initial_schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/001_initial_schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/auth.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/auth.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/canvas.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/canvas.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/chat.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/chat.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/groups.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/groups.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/voting.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/voting.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/api-gateway/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/Cargo.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/api-gateway/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/middleware/auth.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/middleware/auth.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/auth.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/auth.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/canvas.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/canvas.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/chat.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/chat.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/groups.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/groups.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/routes/voting.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/routes/voting.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/state.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/state.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/src/handlers/login.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/src/handlers/login.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/src/handlers/register.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/src/handlers/register.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/src/handlers/session.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/src/handlers/session.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/src/jwt.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/src/jwt.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/src/password.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/src/password.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/canvas-service/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/services/canvas-service/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/canvas-service/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/canvas-service/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/chat-service/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/services/chat-service/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/chat-service/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/chat-service/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/chat-service/src/state.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/chat-service/src/state.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/group-service/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/services/group-service/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/group-service/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/group-service/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/scheduler-service/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/services/scheduler-service/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/scheduler-service/src/jobs/activity_check.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/scheduler-service/src/jobs/activity_check.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/scheduler-service/src/jobs/round_lifecycle.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/scheduler-service/src/jobs/round_lifecycle.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/scheduler-service/src/jobs/voting_window.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/scheduler-service/src/jobs/voting_window.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/scheduler-service/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/scheduler-service/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/voting-service/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/services/voting-service/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/voting-service/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/voting-service/src/main.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,17 +140,24 @@
     "Cargo.Api-Gateway.executor": "Run",
     "Cargo.Run.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.test_endpoints.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "SHELLCHECK.PATH": "C:\\Users\\Lenovo\\AppData\\Roaming\\JetBrains\\RustRover2025.3\\plugins\\Shell Script\\shellcheck.exe",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/Lenovo/Desktop/Github_repos/PixelWar",
     "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
     "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
     "org.rust.first.attach.projects": "true",
-    "settings.editor.selected.configurable": "language.rust.cargo.check"
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RsExternalLinterProjectSettings">
@@ -134,6 +182,29 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test_endpoints" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PixelWar" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_endpoints.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Compose" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -145,7 +216,13 @@
     <list>
       <item itemvalue="Cargo.Api-Gateway" />
       <item itemvalue="Docker.Compose" />
+      <item itemvalue="Python.test_endpoints" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test_endpoints" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="RustProjectSettings">
     <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
@@ -160,7 +237,11 @@
       <workItem from="1772284143465" duration="9375000" />
       <workItem from="1772296534934" duration="533000" />
       <workItem from="1772297107149" duration="370000" />
-      <workItem from="1772298067660" duration="23414000" />
+      <workItem from="1772298067660" duration="25625000" />
+      <workItem from="1772386951390" duration="108000" />
+      <workItem from="1772387062479" duration="26000" />
+      <workItem from="1772387125478" duration="131000" />
+      <workItem from="1772387381563" duration="8125000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -178,7 +259,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772316357227</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Some doings">
+      <option name="closed" value="true" />
+      <created>1772384858415</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1772384858415</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

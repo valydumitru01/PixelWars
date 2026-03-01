@@ -2,35 +2,39 @@ syntax = "proto3";
 package pixelwar.chat;
 
 service ChatService {
-  rpc SendMessage(SendMessageRequest) returns (MessageResponse);
-  rpc StreamMessages(StreamRequest) returns (stream ChatMessage);
+  rpc SendMessage(SendMessageRequest) returns (SendMessageReply);
+  rpc GetMessages(GetMessagesRequest) returns (GetMessagesReply);
 }
 
 message SendMessageRequest {
-  ChatChannel channel = 1;
-  string content = 2;
+  string sender_id    = 1;
+  string sender_name  = 2;
+  string channel_type = 3;  // "global" | "group" | "whisper"
+  string channel_id   = 4;  // empty for global
+  string content      = 5;
 }
 
-message ChatChannel {
-  oneof channel_type {
-    bool global = 1;
-    string group_id = 2;
-    string whisper_to_user_id = 3;
-  }
-}
-
-message MessageResponse {
+message SendMessageReply {
   string message_id = 1;
 }
 
-message StreamRequest {
-  ChatChannel channel = 1;
+message GetMessagesRequest {
+  string channel_type = 1;
+  string channel_id   = 2;  // empty string for global channel
+  uint32 limit        = 3;
+  string before_id    = 4;  // empty string = start from latest
 }
 
-message ChatMessage {
-  string id = 1;
-  string sender_id = 2;
-  string sender_name = 3;
-  string content = 4;
-  string created_at = 5;
+message ChatMessageProto {
+  string id           = 1;
+  string sender_id    = 2;
+  string sender_name  = 3;
+  string channel_type = 4;
+  string channel_id   = 5;
+  string content      = 6;
+  string created_at   = 7;
+}
+
+message GetMessagesReply {
+  repeated ChatMessageProto messages = 1;
 }

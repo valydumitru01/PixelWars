@@ -47,6 +47,9 @@ chrono = { version = "0.4", features = ["serde"] }
 thiserror = "2"
 anyhow = "1"
 dotenvy = "0.15"
+tonic = { version = "0.12", features = ["transport"] }
+prost = "0.13"
+tokio-cron-scheduler = "0.13"
 shared-common = { path = "crates/shared-common" }
 shared-db = { path = "crates/shared-db" }
 shared-observability = { path = "crates/shared-observability" }

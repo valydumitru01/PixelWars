@@ -2,37 +2,47 @@ syntax = "proto3";
 package pixelwar.groups;
 
 service GroupService {
-  rpc CreateGroup(CreateGroupRequest) returns (GroupResponse);
-  rpc InviteMember(InviteRequest) returns (InviteResponse);
-  rpc AcceptInvite(AcceptInviteRequest) returns (GroupResponse);
-  rpc GetGroup(GetGroupRequest) returns (GroupResponse);
+  rpc CreateGroup(CreateGroupRequest) returns (GroupReply);
+  rpc GetGroup(GetGroupRequest) returns (GroupReply);
+  rpc SendInvite(SendInviteRequest) returns (InviteReply);
+  rpc AcceptInvite(AcceptInviteRequest) returns (GroupReply);
+  rpc GetUserGroup(GetUserGroupRequest) returns (GroupReply);
 }
 
 message CreateGroupRequest {
-  string name = 1;
-}
-
-message InviteRequest {
-  string group_id = 1;
-  string to_user_id = 2;
-}
-
-message AcceptInviteRequest {
-  string invite_id = 1;
+  string name       = 1;
+  string creator_id = 2;
+  string round_id   = 3;
 }
 
 message GetGroupRequest {
   string group_id = 1;
 }
 
-message GroupResponse {
-  string group_id = 1;
-  string name = 2;
-  string creator_id = 3;
+message GroupReply {
+  string          group_id   = 1;
+  string          name       = 2;
+  string          creator_id = 3;
   repeated string member_ids = 4;
+  string          created_at = 5;
 }
 
-message InviteResponse {
+message SendInviteRequest {
+  string group_id     = 1;
+  string from_user_id = 2;
+  string to_user_id   = 3;
+}
+
+message InviteReply {
   string invite_id = 1;
-  string status = 2;
+}
+
+message AcceptInviteRequest {
+  string invite_id = 1;
+  string user_id   = 2;
+}
+
+message GetUserGroupRequest {
+  string user_id  = 1;
+  string round_id = 2;
 }

@@ -26,6 +26,10 @@ pub struct Parcel {
 
 #[derive(Debug, Deserialize)]
 pub struct ClaimParcelRequest {
+    /// Set by the handler from JWT claims — not read from the JSON body.
+    #[serde(skip_deserializing)]
+    pub user_id: Uuid,
+    pub round_id: Uuid,
     pub origin_x: u32,
     pub origin_y: u32,
     pub width: u32,

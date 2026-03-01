@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="EMPTY_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Python" name="Python facet">
+      <configuration sdkName="Python 3.13 (PixelWar)" />
+    </facet>
+  </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/crates/shared-common/src" isTestSource="false" />
@@ -13,9 +18,11 @@
       <sourceFolder url="file://$MODULE_DIR$/services/group-service/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/services/scheduler-service/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/services/voting-service/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Python 3.13 (PixelWar) interpreter library" level="application" />
   </component>
 </module>
