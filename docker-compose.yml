@@ -1,6 +1,33 @@
-version: "3.8"
-
 services:
+  # ── Microservices ──────────────────────────────────
+  auth-service:
+    build: .
+    command: ./auth-service
+    depends_on:
+      postgres: { condition: service_healthy }
+    healthcheck:
+      test: [ "CMD-SHELL", "nc -z localhost 9001 || exit 1" ]
+      interval: 3s
+      retries: 10
+
+  canvas-service:
+    build: .
+    command: ./canvas-service
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    healthcheck:
+      test: [ "CMD-SHELL", "nc -z localhost 9002 || exit 1" ]
+      interval: 3s
+
+  api-gateway:
+    build: .
+    command: ./api-gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      auth-service: { condition: service_healthy }
+      canvas-service: { condition: service_healthy }
   # ── Infrastructure ──────────────────────────────────────
   postgres:
     image: public.ecr.aws/docker/library/postgres:16-alpine

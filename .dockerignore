@@ -1,0 +1,7 @@
+target/
+.git/
+.env
+*.log
+docker-data/
+scripts/
+.venv/

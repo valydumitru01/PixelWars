@@ -47,9 +47,7 @@ async fn main() -> anyhow::Result<()> {
     // Connect gRPC clients to downstream services
     tracing::info!("Configuring downstream gRPC services (lazy connect)...");
 
-    let auth_client = AuthServiceClient::new(
-        Endpoint::from_shared(config.auth_grpc_url.clone())?.connect_lazy()
-    );
+    let auth_client = AuthServiceClient::connect(config.auth_grpc_url.clone()).await?;
     let canvas_client = CanvasServiceClient::new(
         Endpoint::from_shared(config.canvas_grpc_url.clone())?.connect_lazy()
     );

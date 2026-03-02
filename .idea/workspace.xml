@@ -41,13 +41,106 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fba6ddd5-8e55-46f3-9c46-f52c76cbbcd4" name="Changes" comment="Backend executes">
-      <change afterPath="$PROJECT_DIR$/config/pgadmin_servers.json" afterDir="false" />
+    <list default="true" id="fba6ddd5-8e55-46f3-9c46-f52c76cbbcd4" name="Changes" comment="Added UIs for Postgres and Redis">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/dev.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/migrate.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/seed.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/api-gateway/build.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/api-gateway/src/clients/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/build.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/adapters/event_publisher.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/adapters/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/adapters/password_hasher.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/adapters/repository.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/adapters/token_provider.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/application/get_user.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/application/login_user.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/application/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/application/register_user.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/application/validate_token.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/domain/commands.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/domain/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/domain/validation.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/grpc/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/grpc/server.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/auth-service/src/ports.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/build.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/adapters/event_publisher.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/adapters/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/adapters/pixel_cache.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/adapters/repository.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/application/check_overlap.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/application/claim_parcel.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/application/get_parcel.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/application/get_snapshot.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/application/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/application/update_pixels.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/domain/commands.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/grpc/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/grpc/server.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/canvas-service/src/ports.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/build.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/adapters/event_publisher.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/adapters/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/adapters/repository.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/application/get_messages.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/application/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/application/send_message.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/domain/commands.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/domain/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/domain/validation.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/grpc/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/grpc/server.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/chat-service/src/ports.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/build.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/adapters/event_publisher.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/adapters/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/adapters/repository.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/application/accept_invite.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/application/create_group.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/application/get_group.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/application/get_user_group.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/application/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/application/send_invite.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/domain/commands.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/domain/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/grpc/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/grpc/server.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/group-service/src/ports.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/adapters/event_publisher.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/adapters/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/adapters/repository.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/application/close_voting.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/application/end_round.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/application/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/application/run_activity_check.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/application/start_round.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/domain/commands.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/domain/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/scheduler-service/src/ports.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/build.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/adapters/event_publisher.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/adapters/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/adapters/repository.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/application/cast_vote.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/application/get_results.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/application/is_voting_open.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/application/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/domain/commands.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/domain/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/domain/tallying.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/grpc/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/grpc/server.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/voting-service/src/ports.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_endpoints.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crates/shared-common/src/errors.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/shared-common/src/errors.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/api-gateway/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/api-gateway/src/middleware/tracing.rs" beforeDir="false" afterPath="$PROJECT_DIR$/services/api-gateway/src/middleware/tracing.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +158,13 @@
     </selectedModels>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="RsBuildProfile:dev" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -200,7 +300,7 @@
       <workItem from="1772387062479" duration="26000" />
       <workItem from="1772387125478" duration="131000" />
       <workItem from="1772387381563" duration="15115000" />
-      <workItem from="1772459293909" duration="11303000" />
+      <workItem from="1772459293909" duration="15468000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -242,14 +342,23 @@
       <option name="project" value="LOCAL" />
       <updated>1772447420353</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added UIs for Postgres and Redis">
+      <option name="closed" value="true" />
+      <created>1772477466082</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1772477466082</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Some doings" />
     <MESSAGE value="Backend executes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Backend executes" />
+    <MESSAGE value="Added UIs for Postgres and Redis" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added UIs for Postgres and Redis" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
