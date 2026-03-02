@@ -1,11 +1,20 @@
+mod adapters;
+mod application;
+mod domain;
 mod jobs;
+mod ports;
 mod state;
 
+use std::sync::Arc;
 use std::time::Duration;
+
 use axum::Router;
 use tokio::time;
 use tracing::{info, error};
 
+use adapters::event_publisher::NatsEventPublisher;
+use adapters::repository::{PgParcelRepository, PgRoundRepository, PgUserRepository};
+use application::{close_voting, end_round, run_activity_check, start_round};
 use shared_common::config::ServiceConfig;
 use shared_observability::{health_routes, init_metrics, init_tracing};
 
@@ -17,10 +26,43 @@ async fn main() -> anyhow::Result<()> {
     init_tracing(&config.service_name, &config.otel_endpoint)?;
     init_metrics(9196)?;
 
+    // ── Infrastructure ──────────────────────────────────────────────────────
     let db   = shared_db::postgres::create_pool(&config.database_url).await?;
     let nats = shared_messaging::NatsClient::connect(&config.nats_url).await?;
 
-    let state = state::SchedulerState { db, nats };
+    // ── Adapters ────────────────────────────────────────────────────────────
+    let user_repo: Arc<dyn ports::UserRepository> = Arc::new(PgUserRepository::new(db.clone()));
+    let parcel_repo: Arc<dyn ports::ParcelRepository> = Arc::new(PgParcelRepository::new(db.clone()));
+    let round_repo: Arc<dyn ports::RoundRepository> = Arc::new(PgRoundRepository::new(db.clone()));
+    let events: Arc<dyn ports::EventPublisher> = Arc::new(NatsEventPublisher::new(nats));
+
+    // ── Use cases ───────────────────────────────────────────────────────────
+    let activity_check = Arc::new(run_activity_check::RunActivityCheck::new(
+        Arc::clone(&user_repo),
+        Arc::clone(&parcel_repo),
+        Arc::clone(&events),
+    ));
+    let end_round_uc = Arc::new(end_round::EndRound::new(
+        Arc::clone(&round_repo),
+        Arc::clone(&events),
+    ));
+    let close_voting_uc = Arc::new(close_voting::CloseVoting::new(
+        Arc::clone(&round_repo),
+        Arc::clone(&events),
+    ));
+    let start_round_uc = Arc::new(start_round::StartRound::new(
+        Arc::clone(&round_repo),
+        Arc::clone(&events),
+    ));
+
+    // ── Application state ───────────────────────────────────────────────────
+    let state = state::SchedulerState {
+        run_activity_check: activity_check,
+        end_round: end_round_uc,
+        close_voting: close_voting_uc,
+        start_round: start_round_uc,
+        round_repo: Arc::clone(&round_repo),
+    };
 
     info!("Scheduler service starting");
 
@@ -34,14 +76,8 @@ async fn main() -> anyhow::Result<()> {
         let mut interval = time::interval(Duration::from_secs(6 * 3600));
         loop {
             interval.tick().await;
-            match jobs::round_lifecycle::get_active_round(&activity_state).await {
-                Ok(Some(round_id)) => {
-                    if let Err(e) = jobs::activity_check::run_activity_check(&activity_state, round_id).await {
-                        error!(error = %e, "Activity check failed");
-                    }
-                }
-                Ok(None) => info!("No active round, skipping activity check"),
-                Err(e) => error!(error = %e, "Failed to get active round"),
+            if let Err(e) = jobs::activity_check::run_activity_check_job(&activity_state).await {
+                error!(error = %e, "Activity check failed");
             }
         }
     });
@@ -52,22 +88,14 @@ async fn main() -> anyhow::Result<()> {
         let mut interval = time::interval(Duration::from_secs(3600));
         loop {
             interval.tick().await;
-            // Check if active round has expired
-            let maybe_expired = sqlx::query!(
-                "SELECT id FROM rounds WHERE is_active = true AND ends_at < NOW() LIMIT 1"
-            )
-            .fetch_optional(&round_state.db)
-            .await;
 
-            if let Ok(Some(round)) = maybe_expired {
-                info!(round_id = %round.id, "Round expired, ending it...");
-                if let Err(e) = jobs::round_lifecycle::end_round(&round_state, round.id).await {
-                    error!(error = %e, "Failed to end round");
-                }
+            // Check if active round has expired and end it
+            if let Err(e) = jobs::round_lifecycle::end_expired_round_job(&round_state).await {
+                error!(error = %e, "Failed to end round");
             }
 
             // Close expired voting windows
-            if let Err(e) = jobs::voting_window::close_expired_voting(&round_state).await {
+            if let Err(e) = jobs::voting_window::close_expired_voting_job(&round_state).await {
                 error!(error = %e, "Failed to close voting windows");
             }
         }

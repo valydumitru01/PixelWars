@@ -1,10 +1,9 @@
-use redis::aio::ConnectionManager;
-use shared_messaging::NatsClient;
-use sqlx::PgPool;
+use std::sync::Arc;
+
+use crate::application::{send_message, get_messages};
 
 #[derive(Clone)]
 pub struct ChatState {
-    pub db: PgPool,
-    pub redis: ConnectionManager,
-    pub nats: NatsClient,
+    pub send_message: Arc<send_message::SendMessage>,
+    pub get_messages: Arc<get_messages::GetMessages>,
 }

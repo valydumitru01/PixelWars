@@ -1,17 +1,23 @@
+mod adapters;
+mod application;
+mod domain;
 mod grpc;
-mod handlers;
-mod jwt;
-mod password;
+mod ports;
 mod state;
 
-use axum::{routing::{get, post}, Router};
+use std::sync::Arc;
+
 use tonic::transport::Server as TonicServer;
 use tracing::info;
 
+use adapters::event_publisher::NatsEventPublisher;
+use adapters::password_hasher::Argon2PasswordHasher;
+use adapters::repository::PgUserRepository;
+use adapters::token_provider::JwtTokenProvider;
+use application::{get_user, login_user, register_user, validate_token};
 use grpc::server::{AuthGrpcService, AuthServiceServer};
 use shared_common::config::ServiceConfig;
 use shared_observability::{health_routes, init_metrics, init_tracing};
-use state::AuthState;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -21,31 +27,55 @@ async fn main() -> anyhow::Result<()> {
     init_tracing(&config.service_name, &config.otel_endpoint)?;
     init_metrics(9191)?;
 
+    // ── Infrastructure ──────────────────────────────────────────────────────
     let db   = shared_db::postgres::create_pool(&config.database_url).await?;
     let nats = shared_messaging::NatsClient::connect(&config.nats_url).await?;
 
-    let state = AuthState { db: db.clone(), nats, jwt_secret: config.jwt_secret.clone() };
+    // ── Adapters ────────────────────────────────────────────────────────────
+    let user_repo: Arc<dyn ports::UserRepository> = Arc::new(PgUserRepository::new(db));
+    let hasher: Arc<dyn ports::PasswordHasher>     = Arc::new(Argon2PasswordHasher);
+    let tokens: Arc<dyn ports::TokenProvider>      = Arc::new(JwtTokenProvider::new(config.jwt_secret.clone()));
+    let events: Arc<dyn ports::EventPublisher>     = Arc::new(NatsEventPublisher::new(nats));
 
-    // ── HTTP server ──────────────────────────────────────────────────────────
-    let http_app = Router::new()
-        .merge(health_routes(&config.service_name))
-        .route("/register", post(handlers::register::handle_register))
-        .route("/login",    post(handlers::login::handle_login))
-        .route("/session",  get(handlers::session::validate_session))
-        .with_state(state.clone());
+    // ── Use cases ───────────────────────────────────────────────────────────
+    let register = Arc::new(register_user::RegisterUser::new(
+        Arc::clone(&user_repo),
+        Arc::clone(&hasher),
+        Arc::clone(&tokens),
+        Arc::clone(&events),
+    ));
+    let login = Arc::new(login_user::LoginUser::new(
+        Arc::clone(&user_repo),
+        Arc::clone(&hasher),
+        Arc::clone(&tokens),
+        Arc::clone(&events),
+    ));
+    let validate = Arc::new(validate_token::ValidateToken::new(Arc::clone(&tokens)));
+    let get_user_uc = Arc::new(get_user::GetUser::new(Arc::clone(&user_repo)));
+
+    // ── Application state ───────────────────────────────────────────────────
+    let state = state::AuthState {
+        register_user: register,
+        login_user: login,
+        validate_token: validate,
+        get_user: get_user_uc,
+    };
+
+    // ── HTTP health server ──────────────────────────────────────────────────
+    let http_app = axum::Router::new()
+        .merge(health_routes(&config.service_name));
 
     let http_addr = config.http_addr();
     let grpc_addr = config.grpc_addr();
 
     info!(http = %http_addr, grpc = %grpc_addr, "Auth service starting");
 
-    // ── gRPC server ───────────────────────────────────────────────────────────
+    // ── gRPC server ─────────────────────────────────────────────────────────
     let grpc_svc = AuthGrpcService { state };
     let grpc_server = TonicServer::builder()
         .add_service(AuthServiceServer::new(grpc_svc))
         .serve(grpc_addr);
 
-    // Run both concurrently
     tokio::try_join!(
         async {
             let listener = tokio::net::TcpListener::bind(http_addr).await?;

@@ -27,6 +27,6 @@ pub async fn rate_limit(
     if is_allowed {
         Ok(next.run(request).await)
     } else {
-        Err(AppError::RateLimited)
+        Err(AppError::RateLimited(format!("Rate limit exceeded for IP: {}", user_ip)))
     }
 }

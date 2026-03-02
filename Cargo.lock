@@ -2513,6 +2513,7 @@ name = "scheduler-service"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "async-trait",
  "axum 0.8.8",
  "chrono",
  "dotenvy",
@@ -2710,6 +2711,7 @@ dependencies = [
  "serde",
  "serde_json",
  "thiserror 2.0.18",
+ "tonic 0.12.3",
  "tracing",
  "uuid",
 ]

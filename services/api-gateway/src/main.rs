@@ -8,6 +8,7 @@ use axum::error_handling::HandleErrorLayer;
 use axum::http::{HeaderName, HeaderValue, StatusCode};
 use axum::middleware::from_fn;
 use axum::{routing::get, Extension, Router};
+use tonic::transport::Endpoint;
 use tower::buffer::BufferLayer;
 use tower::limit::RateLimitLayer;
 use tower::{BoxError, ServiceBuilder};
@@ -37,19 +38,33 @@ async fn main() -> anyhow::Result<()> {
 
     let config = ServiceConfig::from_env("api-gateway")?;
     init_tracing(&config.service_name, &config.otel_endpoint)?;
-    init_metrics(9090)?;
+    // Offset the HTTP port by 10000 to guarantee a unique metrics port per service.
+    let metrics_port = config.port + 10000;
+    init_metrics(metrics_port)?;
 
     let redis = shared_db::redis::create_connection_manager(&config.redis_url).await?;
     let nats  = shared_messaging::NatsClient::connect(&config.nats_url).await?;
 
     // Connect gRPC clients to downstream services
-    info!("Connecting to downstream gRPC services...");
-    let auth_client   = AuthServiceClient::connect(config.auth_grpc_url.clone()).await?;
-    let canvas_client = CanvasServiceClient::connect(config.canvas_grpc_url.clone()).await?;
-    let chat_client   = ChatServiceClient::connect(config.chat_grpc_url.clone()).await?;
-    let voting_client = VotingServiceClient::connect(config.voting_grpc_url.clone()).await?;
-    let group_client  = GroupServiceClient::connect(config.group_grpc_url.clone()).await?;
-    info!("All gRPC clients connected");
+    info!("Configuring downstream gRPC services (lazy connect)...");
+
+    let auth_client = AuthServiceClient::new(
+        Endpoint::from_shared(config.auth_grpc_url.clone())?.connect_lazy()
+    );
+    let canvas_client = CanvasServiceClient::new(
+        Endpoint::from_shared(config.canvas_grpc_url.clone())?.connect_lazy()
+    );
+    let chat_client = ChatServiceClient::new(
+        Endpoint::from_shared(config.chat_grpc_url.clone())?.connect_lazy()
+    );
+    let voting_client = VotingServiceClient::new(
+        Endpoint::from_shared(config.voting_grpc_url.clone())?.connect_lazy()
+    );
+    let group_client = GroupServiceClient::new(
+        Endpoint::from_shared(config.group_grpc_url.clone())?.connect_lazy()
+    );
+
+    info!("All gRPC channels configured");
 
     let app_state = state::AppState {
         redis,
