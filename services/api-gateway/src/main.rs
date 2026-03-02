@@ -18,7 +18,6 @@ use tower_http::cors::CorsLayer;
 use tower_http::limit::RequestBodyLimitLayer;
 use tower_http::propagate_header::PropagateHeaderLayer;
 use tower_http::trace::TraceLayer;
-use tracing::{info, info_span};
 
 use clients::auth::auth_service_client::AuthServiceClient;
 use clients::canvas::canvas_service_client::CanvasServiceClient;
@@ -46,7 +45,7 @@ async fn main() -> anyhow::Result<()> {
     let nats  = shared_messaging::NatsClient::connect(&config.nats_url).await?;
 
     // Connect gRPC clients to downstream services
-    info!("Configuring downstream gRPC services (lazy connect)...");
+    tracing::info!("Configuring downstream gRPC services (lazy connect)...");
 
     let auth_client = AuthServiceClient::new(
         Endpoint::from_shared(config.auth_grpc_url.clone())?.connect_lazy()
@@ -64,7 +63,7 @@ async fn main() -> anyhow::Result<()> {
         Endpoint::from_shared(config.group_grpc_url.clone())?.connect_lazy()
     );
 
-    info!("All gRPC channels configured");
+    tracing::info!("All gRPC channels configured");
 
     let app_state = state::AppState {
         redis,
@@ -77,7 +76,7 @@ async fn main() -> anyhow::Result<()> {
         group_client,
     };
 
-    let _span = info_span!("gateway_startup_check").entered();
+    let _span = tracing::info_span!("gateway_startup_check").entered();
 
     let rate_limit_layer = ServiceBuilder::new()
         .layer(HandleErrorLayer::new(|err: BoxError| async move {
@@ -110,6 +109,36 @@ async fn main() -> anyhow::Result<()> {
             HeaderValue::from_static("max-age=31536000; includeSubDomains"),
         ));
 
+    let trace_layer = TraceLayer::new_for_http()
+        .make_span_with(|request: &axum::http::Request<_>| {
+            // This creates the span with standard OTel attributes
+            tracing::info_span!(
+                    "http_request",
+                    http.method = %request.method(),
+                    http.uri = %request.uri(),
+                    user_id = tracing::field::Empty,
+                    http.status_code = tracing::field::Empty, // We leave this empty to fill later
+                    otel.name = format!("{} {}", request.method(), request.uri().path()),
+                    otel.kind = "server",
+                )
+        })
+        .on_response(|response: &axum::http::Response<_>, latency: std::time::Duration, span: &tracing::Span| {
+            let status = response.status().as_u16();
+
+            // Record the status code into the span's field
+            span.record("http.status_code", status);
+
+            // If it's a 5xx error, mark the span as an error in Jaeger
+            if status >= 500 {
+                span.record("otel.status_code", "ERROR");
+            }
+
+            tracing::info!(
+                    latency = ?latency,
+                    status = status,
+                    "Finished processing request"
+                );
+        });
     // Inject jwt_secret into all requests so auth middleware can access it
     let jwt_secret = config.jwt_secret.clone();
 
@@ -126,17 +155,17 @@ async fn main() -> anyhow::Result<()> {
         .merge(public_routes)
         .merge(private_routes)
         .layer(from_fn(request_tracing))
-        .layer(TraceLayer::new_for_http())
         .layer(rate_limit_layer)
         .layer(RequestBodyLimitLayer::new(1024 * 1024))
         .layer(timeout_layer)
         .layer(http_header_layers)
+        .layer(trace_layer)
         .layer(PropagateHeaderLayer::new(HeaderName::from_static("x-request-id")))
         .layer(CorsLayer::permissive())
         .with_state(app_state);
 
     let addr = format!("{}:{}", config.host, config.port);
-    info!(addr = %addr, "API Gateway starting");
+    tracing::info!(addr = %addr, "API Gateway starting");
 
     let listener = tokio::net::TcpListener::bind(&addr).await?;
     axum::serve(listener, app).await?;

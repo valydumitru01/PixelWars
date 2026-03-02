@@ -52,6 +52,15 @@ pub fn app_error_to_status(err: AppError) -> tonic::Status {
 impl axum::response::IntoResponse for AppError {
     fn into_response(self) -> axum::response::Response {
         use axum::http::StatusCode;
+
+        // Internal errors are logged at ERROR level, while user-facing errors are logged at
+        // WARN level
+        if let AppError::Internal(_) | AppError::Database(_) | AppError::Grpc(_) = self {
+            tracing::error!(error = %self, "Critical internal error occurred");
+        } else {
+            tracing::warn!(error = %self, "User-facing error occurred");
+        }
+
         let (status, msg) = match &self {
             AppError::AuthError(_)  => (StatusCode::UNAUTHORIZED, self.to_string()),
             AppError::NotFound(_)   => (StatusCode::NOT_FOUND, self.to_string()),
@@ -59,12 +68,16 @@ impl axum::response::IntoResponse for AppError {
             AppError::Conflict(_)   => (StatusCode::CONFLICT, self.to_string()),
             AppError::Forbidden(_)  => (StatusCode::FORBIDDEN, self.to_string()),
             AppError::RateLimited(_)   => (StatusCode::TOO_MANY_REQUESTS, self.to_string()),
-            _                       => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::Internal(_)   => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::Database(_)   => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::Messaging(_)   => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::Grpc(_)   => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
         };
+
+        // Return a JSON response with the error message
         (status, axum::Json(serde_json::json!({ "error": msg }))).into_response()
     }
 }
-
 impl From<anyhow::Error> for AppError {
     fn from(e: anyhow::Error) -> Self {
         AppError::Internal(e.to_string())
